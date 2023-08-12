@@ -34,7 +34,7 @@ m4_include([m4/slg_gcc_all_warnings.m4])
 
 # Must use C++17 mode. (mandatory)
 AC_LANG_PUSH(C++)
-AX_CXX_COMPILE_STDCXX([17], [noext], [mandatory])
+AX_CXX_COMPILE_STDCXX([17])
 AC_LANG_POP()
 
 
