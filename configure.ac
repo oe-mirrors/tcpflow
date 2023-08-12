@@ -53,42 +53,7 @@ AC_LANG_POP()
 # mingw32 includes  i686-w64-mingw32 and  x86_64-w64-mingw32
 
 mingw="no"
-case $host in
-  *-*-*linux*-*)
-     AC_DEFINE([__LINUX__],1,[Linux operating system functions])
-     ;;
-
-  *-*-mingw32*)
-     LIBS="-lpsapi -lws2_32 -lgdi32 $LIBS"
-     CPPFLAGS="-DUNICODE -D_UNICODE -D__MSVCRT_VERSION__=0x0601 -DWINVER=0x0500 -D_WIN32_WINNT=0x0500 -g $CPPFLAGS"
-     CPPFLAGS="$CPPFLAGS --static"
-     CFLAGS="$CFLAGS --static -static-libgcc -static-libstdc++"
-     CXXFLAGS="$CXXFLAGS -Wno-format "  # compiler mingw-4.3.0 is broken on I64u formats
-     CXXFLAGS="$CXXFLAGS --static -static-libgcc -static-libstdc++"
-     LDFLAGS="$LDFLAGS --static"
-     mingw="yes"
-     ;;
-
-   *)
-     CXXFLAGS="$CXXFLAGS -Wno-address-of-packed-member"
-     ;;
-esac
-
-if test x"${mingw}" == "xno" ; then
-  # Bring additional directories where things might be found into our
-  # search path. I don't know why autoconf doesn't do this by default
-  for spfx in /usr/local /opt/local /sw /usr/local/ssl /usr/boost/include ; do
-    AC_MSG_NOTICE([checking ${spfx}/include])
-    if test -d ${spfx}/include; then
-        CPPFLAGS="-I${spfx}/include $CPPFLAGS"
-        LDFLAGS="-L${spfx}/lib $LDFLAGS"
-        AC_MSG_NOTICE([ *** ADDING ${spfx}/include to CPPFLAGS *** ])
-        AC_MSG_NOTICE([ *** ADDING ${spfx}/lib to LDFLAGS *** ])
-    fi
-  done
-  AC_MSG_NOTICE([ CPPFLAGS = ${CPPFLAGS} ])
-  AC_MSG_NOTICE([ LDFLAGS = ${LDFLAGS} ])
-fi
+AC_DEFINE([__LINUX__],1,[Linux operating system functions])
 
 if test -r /bin/uname.exe ; then
   if test "`uname -o`" == "Msys" ; then
