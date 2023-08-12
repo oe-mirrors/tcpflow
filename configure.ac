@@ -175,9 +175,9 @@ AC_CHECK_LIB([crypto],[EVP_get_digestbyname])	# if crypto is available, get it
 AC_CHECK_LIB([md],[MD5])                        # if libmd is available, get it
 
 # Need either SSL_library_init or OPENSSL_init_ssl, depending on openssl version
-AC_CHECK_LIB([ssl],[SSL_library_init],,
-     AC_CHECK_LIB([ssl],[OPENSSL_init_ssl],,
-          AC_MSG_ERROR([OpenSSL developer library 'libssl-dev' or 'openssl-devel' not installed])))
+#AC_CHECK_LIB([ssl],[SSL_library_init],,
+#     AC_CHECK_LIB([ssl],[OPENSSL_init_ssl],,
+#          AC_MSG_ERROR([OpenSSL developer library 'libssl-dev' or 'openssl-devel' not installed])))
 
 AC_CHECK_FUNCS([MD5_Init EVP_get_digestbyname])
 
